@@ -37,12 +37,13 @@ class Options(object):
     shared by all compiledb subcommands"""
 
     def __init__(self, infile, outfile, build_dir, exclude_files, no_build,
-                 verbose, overwrite, strict, add_predefined_macros, use_full_path, command_style):
+                 verbose, no_build_message, overwrite, strict, add_predefined_macros, use_full_path, command_style):
         self.infile = infile
         self.outfile = outfile
         self.build_dir = build_dir
         self.exclude_files = exclude_files
         self.verbose = verbose
+        self.no_build_message = no_build_message
         self.no_build = no_build
         self.overwrite = overwrite
         self.strict = strict
@@ -69,6 +70,8 @@ class Options(object):
               help='Only generates compilation db file.')
 @click.option('-v', '--verbose', is_flag=True, default=False,
               help='Print verbose messages.')
+@click.option('-b', '--no-build-message', is_flag=True, default=False,
+              help='Silence build message.')
 @click.option('-f', '--overwrite', is_flag=True, default=False,
               help='Overwrite compile_commands.json instead of just updating it.')
 @click.option('-S', '--no-strict', is_flag=True, default=False,
@@ -82,7 +85,7 @@ class Options(object):
               help='Output compilation database with single "command" '
               'string rather than the default "arguments" list of strings.')
 @click.pass_context
-def cli(ctx, infile, outfile, build_dir, exclude_files, no_build, verbose, overwrite, no_strict, add_predefined_macros,
+def cli(ctx, infile, outfile, build_dir, exclude_files, no_build, verbose, no_build_message, overwrite, no_strict, add_predefined_macros,
         use_full_path, command_style):
     """Clang's Compilation Database generator for make-based build systems.
        When no subcommand is used it will parse build log/commands and generates
@@ -94,7 +97,7 @@ def cli(ctx, infile, outfile, build_dir, exclude_files, no_build, verbose, overw
                         use_full_path, command_style)
         exit(0 if done else 1)
     else:
-        ctx.obj = Options(infile, outfile, build_dir, exclude_files, no_build, verbose, overwrite, not no_strict,
+        ctx.obj = Options(infile, outfile, build_dir, exclude_files, no_build, verbose, no_build_message, overwrite, not no_strict,
                           add_predefined_macros, use_full_path, command_style)
 
 

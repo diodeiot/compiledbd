@@ -79,7 +79,8 @@ def command(ctx, make_cmd, make_args):
 
     if not options.no_build:
         cmd = [make_cmd] + list(make_args)
-        print("## Building [{}]...".format(' '.join(cmd)))
+        if not options.no_build_message:
+            print("## Building [{}]...".format(' '.join(cmd)))
         ret = call(cmd, stdout=stdout, stderr=stderr)
         print()
         if ret != 0:
