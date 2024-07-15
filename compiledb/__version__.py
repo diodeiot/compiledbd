@@ -1,7 +1,7 @@
 __title__ = 'compiledbd'
 __description__ = 'Tool for generating Clang JSON Compilation Database files for make-based build systems.'
 __url__ = 'https://github.com/diodeiot/compiledbd'
-__version__ = '0.9.0'
+__version__ = '0.9.1'
 __author__ = 'Kadir Sevil'
 __author_email__ = 'kadir.sevil@diodeiot.com'
 __license__ = 'GPLv3'
