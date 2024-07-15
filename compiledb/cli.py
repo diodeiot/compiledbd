@@ -27,6 +27,7 @@ import logging
 
 from . import generate
 from .commands import make
+from compiledb.__version__ import __version__
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
@@ -51,6 +52,7 @@ class Options(object):
 
 
 @click.group(context_settings=CONTEXT_SETTINGS, invoke_without_command=True)
+@click.version_option(__version__, message="%(version)s")
 @click.option('-p', '--parse', 'infile', type=click.File('r'),
               help='Build log file to parse compilation commands from.' +
               '(Default: stdin)', required=False, default=sys.stdin)
