@@ -1,3 +1,10 @@
+## Attention!
+
+This repo is forked from the official [repo](https://github.com/nickdiego/compiledb).
+Since the official repo hasn't accepted new pull requests for a long time, DiodeIoT decided to improve this tool on its own forked repo.
+
+All credits go to [nickdiego](https://github.com/nickdiego)
+
 # Compilation Database Generator
 
 [![CircleCI branch](https://img.shields.io/circleci/project/github/nickdiego/compiledb/master.svg)](https://circleci.com/gh/nickdiego/compiledb)
