@@ -89,6 +89,7 @@ def command(ctx, make_cmd, make_args):
     done = False
     args = vars(options)
     del args['no_build']
+    del args['no_build_message']
     with AutoconfMockScript(options.verbose) as mock_script:
         cmd = [make_cmd, logging_mode_flags] + list(make_args)
         if mock_script.path:
