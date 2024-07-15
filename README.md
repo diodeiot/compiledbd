@@ -26,64 +26,61 @@ YCM-generator's fake-toolchanin approach.
 ## Installation
 
 ```
-# pip install compiledb
+# pip install compiledbd
 ```
 - Supports Python 2.x and 3.x (for now, tested only with 2.7 and 3.6 versions)
-- For bash completion support, add the content of `sh-completion/compiledb.bash` file
-  to your `.bashrc` file, for example.
-- _ZSH completion coming soon :)_
 
 ## Usage
 
-`compiledb` provides a `make` python wrapper script which, besides to execute the make
+`compiledbd` provides a `make` python wrapper script which, besides to execute the make
 build command, updates the JSON compilation database file corresponding to that build,
 resulting in a command-line interface similar to [Bear][bear].
 
-To generate `compile_commands.json` file using compiledb's "make wrapper" script,
+To generate `compile_commands.json` file using compiledbd's "make wrapper" script,
 executing Makefile target `all`:
 ```bash
-$ compiledb make
+$ compiledbd make
 ```
 
-`compiledb` forwards all the options/arguments passed after `make` subcommand to GNU Make,
+`compiledbd` forwards all the options/arguments passed after `make` subcommand to GNU Make,
 so one can, for example, generate `compile_commands.json` using `core/main.mk`
 as main makefile (`-f` flag), starting the build from `build` directory (`-C` flag):
 ```bash
-$ compiledb make -f core/main.mk -C build
+$ compiledbd make -f core/main.mk -C build
 ```
 
-By default, `compiledb make` generates the compilation database and runs the actual build
+By default, `compiledbd make` generates the compilation database and runs the actual build
 command requested (acting as a make wrapper), the build step can be skipped using the `-n`
 or `--no-build` options.
 ```bash
-$ compiledb -n make
+$ compiledbd -n make
 ```
 
-`compiledb` base command has been designed so that it can be used to parse compile commands
+`compiledbd` base command has been designed so that it can be used to parse compile commands
 from arbitrary text files (or stdin), assuming it has a build log (ideally generated using
 `make -Bnwk` command), and generates the corresponding JSON Compilation database.
 
 For example, to generate the compilation database from `build-log.txt` file, use the following
 command.
 ```bash
-$ compiledb --parse build-log.txt
+$ compiledbd --parse build-log.txt
 ```
 
 or its equivalent:
 ```bash
-$ compiledb < build-log.txt
+$ compiledbd < build-log.txt
 ```
 
 Or even, to pipe make's output and print the compilation database to the standard output:
 ```bash
-$ make -Bnwk | compiledb -o-
+$ make -Bnwk | compiledbd -o-
 ```
 
-By default `compiledb` generates a JSON compilation database in the "arguments" list
+By default `compiledbd` generates a JSON compilation database in the "arguments" list
 [format](https://clang.llvm.org/docs/JSONCompilationDatabase.html). The "command" string
 format is also supported through the use of the `--command-style` flag:
 ```bash
-$ compiledb --command-style make
+$ compiledbd --command-style make
 ```
 
 ## Testing / Contributing
@@ -91,7 +88,7 @@ $ compiledb --command-style make
 I've implemented this tool because I needed to index some [AOSP][aosp]'s modules for navigating
 and studying purposes (after having no satisfatory results with current tools available by the
 time such as [YCM-Generator][ycm] and [Bear][bear]). So I've reworked YCM-Generator, which resulted
-in the initial version of [compiledb/parser.py](compiledb/parser.py) and used successfully to generate
+in the initial version of [compiledbd/parser.py](compiledbd/parser.py) and used successfully to generate
 `compile_commands.json` for some AOSP modules in ~1min running in a [Docker][docker] container and then
 could use it with some great tools, such as:
 
